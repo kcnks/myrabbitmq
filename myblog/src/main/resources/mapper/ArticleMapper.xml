@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javatiaocao.myblog.mapper.ArticleMapper">
+    <insert id="saveTags" parameterType="com.javatiaocao.myblog.model.Tag">
+        insert into tags(tagName,tagSize) values (#{tagName},#{tagSize})
+    </insert>
+
+    <select id="tagNameIsExist" resultType="java.lang.Integer">
+        select IFNULL((select id from tags where tagName=#{tagName}),0)
+    </select>
+
+    <insert id="insertArticle" parameterType="com.javatiaocao.myblog.model.Article">
+        insert into article
+        (articleId,author,originalAuthor,articleTitle,publishDate,updateDate,articleContent,articleTags,articleType,articleCategories,articleUrl,articleTabloid,likes,lastArticleId,nextArticleId)
+        values
+        (#{articleId},#{author},#{originalAuthor},#{articleTitle},#{publishDate},#{updateDate},#{articleContent},#{articleTags},#{articleType},#{articleCategories},#{articleUrl},#{articleTabloid},#{likes},#{lastArticleId},#{nextArticleId})
+    </insert>
+
+    <select id="getArticleManagement" resultType="com.javatiaocao.myblog.model.Article">
+        select * from article order by id desc
+    </select>
+
+    <delete id="deleteArticle">
+        delete from article where id=#{id}
+    </delete>
+
+    <select id="findArticleById" resultType="com.javatiaocao.myblog.model.Article">
+        select * from article where id = #{id}
+    </select>
+
+    <update id="updateLastNextId">
+        update article set ${lastOrNextstr} = #{updateId} where articleId = #{articleId}
+    </update>
+
+    <select id="getArticleById" resultType="com.javatiaocao.myblog.model.Article">
+        select * from article where id = #{id}
+    </select>
+
+    <select id="getTagsSizeByName" resultType="java.lang.Integer">
+        select distinct tagSize from tags where tagName=#{tagName}
+    </select>
+
+    <select id="getUserPersonalInfo" resultType="com.javatiaocao.myblog.model.User">
+        select * from user where phone = #{phone}
+    </select>
+
+    <select id="userIsExist" resultType="java.lang.Boolean">
+        select * from user where phone = #{phone}
+    </select>
+
+    <update id="updateArticle" parameterType="com.javatiaocao.myblog.model.Article">
+        update article set
+        articleId=#{articleId},author=#{author},originalAuthor=#{originalAuthor},articleTitle=#{articleTitle},publishDate=#{publishDate},updateDate=#{updateDate},articleContent=#{articleContent},articleTags=#{articleTags},articleType=#{articleType},articleCategories=#{articleCategories},articleUrl=#{articleUrl},articleTabloid=#{articleTabloid},likes=#{likes},lastArticleId=#{lastArticleId},nextArticleId=#{nextArticleId}
+        where id = #{id}
+    </update>
+
+    <select id="querryArticleById" resultType="com.javatiaocao.myblog.model.Article">
+        select * from article where id = #{id}
+    </select>
+
+    <select id="findArticleByArticleId" resultType="com.javatiaocao.myblog.model.Article">
+        select * from article where articleId = #{articleId}
+    </select>
+
+    <select id="getArticleTitleByArticleId" resultType="java.lang.String">
+        select articleTitle from article where articleId = #{articleId}
+    </select>
+
+    <select id="getUsernameById" resultType="java.lang.String">
+        select username from user where id = #{id}
+    </select>
+
+    <select id="getArticleByArticleId" resultType="com.javatiaocao.myblog.model.Article">
+        select * from article where articleId=#{articleId}
+    </select>
+
+    <select id="getAllUser" resultType="java.lang.Long">
+        select count(*) from user
+    </select>
+
+    <select id="getArticleNum" resultType="java.lang.Long">
+        select count(*) from article
+    </select>
+
+    <select id="getUseridByPhone" resultType="java.lang.Integer">
+        select id from user where phone=#{phone}
+    </select>
+
+    <update id="updateArticleLikes">
+        update article set likes=likes+1 where articleId=#{articleId}
+    </update>
+
+    <select id="queryLikesByArticleId" resultType="java.lang.Integer">
+        select IFNULL(max(likes),0) from article where articleId=#{articleId}
+    </select>
+
+    <update id="savePersonalDate">
+        update user set trueName=#{trueName},birthday=#{birthday},email=#{email},personalBrief=#{personalBrief} where
+        phone=#{phone}
+    </update>
+
+    <select id="getUserByPhone" resultType="com.javatiaocao.myblog.model.User">
+        select * from user where phone=#{phone}
+    </select>
+
+    <select id="getUsernameByAnwserId" resultType="java.lang.String">
+        select username from user where id=#{id}
+    </select>
+
+
+</mapper>

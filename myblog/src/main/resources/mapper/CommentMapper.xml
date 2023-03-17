@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javatiaocao.myblog.mapper.CommentMapper">
+
+    <select id="getAllComment" resultType="com.javatiaocao.myblog.model.CommentRecord">
+        select * from comment_record order by id desc
+    </select>
+
+
+</mapper>

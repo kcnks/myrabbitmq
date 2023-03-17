@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javatiaocao.myblog.mapper.LikesMapper">
+
+    <select id="getArticleThumbsUp" resultType="com.javatiaocao.myblog.model.ArticleLikesRecord">
+        select * from article_likes_record order by id desc
+    </select>
+
+    <select id="getMsgIsNotReadNum" resultType="java.lang.Integer">
+        select count(*) from article_likes_record where isRead=1
+    </select>
+
+    <update id="readAllThumbsUp">
+        update article_likes_record set isRead=0
+    </update>
+
+    <select id="isLike" resultType="com.javatiaocao.myblog.model.ArticleLikesRecord">
+        select * from article_likes_record where articleId=#{articleId} and likerId=#{userId}
+    </select>
+    <insert id="insertArticleLikesRecord">
+        insert article_likes_record(articleId,likerId,likeDate,isRead) values
+        (#{articleId},#{likerId},#{likeDate},#{isRead})
+    </insert>
+
+
+</mapper>
+
+
+
+

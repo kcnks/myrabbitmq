@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javatiaocao.myblog.mapper.VisitorMapper">
+
+    <select id="getTotalVisitor" resultType="java.lang.Long">
+        select visitorNum from visitor where pageName='visitorNum'
+    </select>
+
+    <select id="getVisitorNumBypageName" resultType="com.javatiaocao.myblog.model.Visitor">
+        select distinct id,visitorNum,pageName from visitor where pageName=#{pageName}
+    </select>
+
+    <insert id="insertVisitor">
+        insert into visitor(visitorNum,pageName) values (0,#{pageName})
+    </insert>
+
+    <update id="updateVisitor">
+        update visitor set pageName=#{pageName},visitorNum=#{visitorNum}
+    </update>
+
+</mapper>

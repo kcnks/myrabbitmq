@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javatiaocao.myblog.mapper.IndexMapper">
+
+    <select id="getMyArticles" resultType="com.javatiaocao.myblog.model.Article">
+        select * from article order by articleId desc
+    </select>
+
+    <select id="getArticlesNum" resultType="java.lang.Integer">
+        select count(*) from article
+    </select>
+
+    <select id="getTagsNum" resultType="java.lang.Integer">
+        select count(*) from tags
+    </select>
+
+    <select id="getCommentsNum" resultType="java.lang.Integer">
+        select count(*) from comment_record
+    </select>
+
+    <select id="getLeaveWordsNum" resultType="java.lang.Integer">
+        select count(*) from leave_message_record
+    </select>
+
+    <select id="getAllTagObject" resultType="com.javatiaocao.myblog.model.Tag">
+        select * from tags
+    </select>
+
+    <select id="getNotReadCommentNum" resultType="java.lang.Integer">
+        select count(*) from comment_record where isRead=1
+    </select>
+
+    <select id="getNotReadLeaveMessageNum" resultType="java.lang.Integer">
+        select count(*) from leave_message_record where isRead=1
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javatiaocao.myblog.mapper.LoginMapper">
+    <select id="selectByUsername" parameterType="String" resultType="com.javatiaocao.myblog.model.User">
+        select * from user where username=#{username}
+    </select>
+    <select id="selectByPhone" parameterType="String" resultType="com.javatiaocao.myblog.model.User">
+        select * from user where phone=#{phone}
+    </select>
+
+    <update id="updaterecentlyLanded">
+        update user set recentlyLanded = #{formatDateForSix} where phone = #{phone}
+    </update>
+
+    <select id="queryRolesByPhone" resultType="com.javatiaocao.myblog.model.Role">
+        SELECT * FROM ROLE WHERE ID IN(SELECT UR.Role_id FROM USER U JOIN user_role UR ON U.ID = UR.User_id WHERE
+        U.phone=#{phone});
+    </select>
+
+
+</mapper>

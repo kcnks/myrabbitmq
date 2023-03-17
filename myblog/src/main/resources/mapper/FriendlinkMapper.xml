@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javatiaocao.myblog.mapper.FriendlinkMapper">
+
+    <select id="getFriendLink" resultType="com.javatiaocao.myblog.model.Friendlink">
+        select * from friendlink
+    </select>
+
+    <update id="updateFriendLink">
+        update friendlink set blogger=#{blogger},url=#{url} where id=#{id}
+    </update>
+
+    <insert id="addFriendLink" parameterType="com.javatiaocao.myblog.model.Friendlink">
+        insert into friendlink(blogger,url) values (#{blogger},#{url})
+    </insert>
+
+    <delete id="deleteFriendLink">
+        delete from friendlink where id=#{id}
+    </delete>
+
+</mapper>
